@@ -5,7 +5,7 @@ const cart = document.getElementById("cart");
 
 // VARIABLES
 
-const cartArray = [];
+let cartArray = [];
 
 // FUNCTIONS
 const createBookCards = function () {
@@ -85,22 +85,52 @@ const addToCart = function (event) {
   //   CART LI CREATION
   const newLi = document.createElement("li");
   newLi.classList.add("d-flex");
-  newLi.classList.add("text-start");
+  newLi.classList.add("align-items-center");
   newLi.classList.add("justify-content-between");
-  newLi.innerHTML = `<span class="me-5">${cardTitle}</span><span>${cardPrice}€</span>`;
+  newLi.classList.add("mt-2");
+  newLi.innerHTML = `<span class="me-5">${cardTitle}</span
+  ><span
+    >${cardPrice}€<button
+      class="btn btn-black btn-sm ms-2 border border-black"
+    >
+      <i class="bi bi-trash-fill" onclick="removeFromCart(event)"></i></button
+  ></span>`;
   cart.appendChild(newLi);
 };
 
 const cartOnLoad = function () {
   const cartElement = JSON.parse(localStorage.getItem("cart"));
+
   cartElement.forEach((element) => {
     const newLi = document.createElement("li");
     newLi.classList.add("d-flex");
-    newLi.classList.add("text-start");
+    newLi.classList.add("mt-2");
+    newLi.classList.add("align-items-center");
     newLi.classList.add("justify-content-between");
-    newLi.innerHTML = `<span class="me-5">${element.title}</span><span>${element.price}€</span>`;
+    newLi.innerHTML = `<span class="me-5">${element.title}</span
+    ><span
+      >${element.price}€<button
+        class="btn btn-black btn-sm ms-2 border border-black"
+      >
+        <i class="bi bi-trash-fill" onclick="removeFromCart(event)"></i></button
+    ></span>`;
     cart.appendChild(newLi);
   });
+  cartArray = [...cartElement];
+  console.log(cartArray);
+};
+
+const removeFromCart = function (event) {
+  const cartElementTargeted = event.target.closest("li");
+  titleToRemove = cartElementTargeted.getElementsByTagName("span")[0].innerHTML;
+  console.log(titleToRemove);
+  const titleToRemoveIndex = cartArray.findIndex((element) => {
+    return element.title === titleToRemove;
+  });
+  console.log(titleToRemoveIndex);
+  cartArray.splice(titleToRemoveIndex, 1);
+  localStorage.setItem("cart", JSON.stringify(cartArray));
+  cartElementTargeted.remove();
 };
 
 // ON-GOING
