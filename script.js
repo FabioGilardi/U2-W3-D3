@@ -32,13 +32,14 @@ const createBookCards = function () {
         const newCol = document.createElement("div");
         newCol.classList.add("col");
         newCol.innerHTML = `
-        <div class="card shadow">
+        <div class="card shadow" style="height: 550px">
               <img
                 src="${book.img}"
                 class="card-img-top"
                 alt="book"
+                style="height: 250px"
               />
-              <div class="card-body">
+              <div class="card-body d-flex flex-column justify-content-around">
                 <h5 class="card-title mb-3">${book.title}</h5>
                 <p class="card-text mb-2">Genre: <span>${book.category}</span></p>
                 <p class="card-text">Price: <span class="price">${book.price}</span>€</p>
