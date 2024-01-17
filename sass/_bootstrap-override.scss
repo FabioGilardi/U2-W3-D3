@@ -1,0 +1,13 @@
+@import "../bootstrap/scss/functions";
+@import "../bootstrap/scss/variables";
+
+// COLORS
+
+// $new-theme-colors: (
+//   // "color-name": #color
+
+// );
+
+$theme-colors: map-merge($theme-colors, $new-theme-colors);
+
+@import "../bootstrap/scss/bootstrap";
